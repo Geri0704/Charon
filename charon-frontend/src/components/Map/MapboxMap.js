@@ -1,60 +1,41 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import './MapboxMap.css'
+import './MapboxMap.css';
+import Navbar from '../SideBar/Navbar';
 
-// Set your Mapbox API Token here
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function MapboxMap() {
-    const mapContainerRef = useRef(null);
-    const [map, setMap] = useState(null);
-    const [userLocation, setUserLocation] = useState({
-        latitude: 43.6426, // Default to CN Tower, Toronto
-        longitude: -79.3871
-    });
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lng, setLng] = useState(-70.9);
+    const [lat, setLat] = useState(42.35);
+    const [zoom, setZoom] = useState(9);
 
     useEffect(() => {
-        // Fetch user's geolocation
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                setUserLocation({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                });
-            }, error => {
-                console.error("Error fetching geolocation:", error);
-            });
-        } else {
-            console.warn("Geolocation is not supported by this browser.");
-        }
-    }, []);
+        if (map.current) return; // initialize map only once
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/mapbox/streets-v12',
+            center: [lng, lat],
+            zoom: zoom,
+        });
 
-    useEffect(() => {
-        const initializeMap = ({ setMap, mapContainerRef }) => {
-            const map = new mapboxgl.Map({
-                container: mapContainerRef.current,
-                style: 'mapbox://styles/mapbox/streets-v11', // This can be adjusted based on the data you have
-                center: [userLocation.longitude, userLocation.latitude],
-                zoom: 12
-            });
+        map.current.on('move', () => {
+            setLng(map.current.getCenter().lng.toFixed(4));
+            setLat(map.current.getCenter().lat.toFixed(4));
+            setZoom(map.current.getZoom().toFixed(2));
+        });
+    }, [lng, lat, zoom]);
 
-            map.on('load', () => {
-                setMap(map);
-                map.resize();
-            });
-        };
-
-        if (!map) initializeMap({ setMap, mapContainerRef });
-
-        // Clean up on component unmount
-        return () => {
-            if (map) {
-                map.remove();
-            }
-        };
-    }, [map, userLocation]);
-
-    return <div ref={mapContainerRef} className="map-container" />;
+    return (
+        <div>
+            <div className="map-container" ref={mapContainer} />
+            {/* Render the Navbar component on top of the map */}
+            <Navbar /> 
+        </div>
+    );
 }
 
 export default MapboxMap;
