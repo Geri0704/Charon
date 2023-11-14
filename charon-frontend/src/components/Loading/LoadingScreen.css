@@ -1,0 +1,16 @@
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8); 
+  }
+
+.loading-content {
+    text-align: center;
+  }
+
+.spinner {
+    margin-bottom: 20px;
+  }

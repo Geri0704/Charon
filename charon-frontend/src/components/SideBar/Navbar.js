@@ -5,7 +5,7 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const [formData1, setFormData1] = useState({ textInput1: '' });
   const [formData2, setFormData2] = useState({ textInput2: '' });
-  const [sliderValue, setSliderValue] = useState(1); // Initialize slider value
+  const [sliderValue, setSliderValue] = useState(2.5); // Initialize slider value
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const toggleSidebar = () => {
@@ -106,9 +106,9 @@ function Navbar() {
               type="range" 
               className="form-range" 
               id="customRange1" 
-              min="0" 
+              min="0.5" 
               max="5" 
-              step="1"
+              step="0.5"
               value={sliderValue}
               onChange={handleSliderChange}
             />
