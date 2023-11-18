@@ -1,11 +1,13 @@
 import React from 'react';
-import './LoadingScreen.css'; // Assuming you have a separate CSS file
-
+import '../../style/LoadingScreen.css'; // Assuming you have a separate CSS file
+import logo from '../assets/logo.png';
 const LoadingScreen = () => (
   <div className="loading-screen">
     <div className="loading-content">
-      <div className="spinner"></div> {/* Placeholder for any loading spinner/animation */}
-      <p>Loading map...</p>
+      <div className="spinner"></div> { 
+        <img src={logo} className="spinning-image" alt="My Application Logo" />
+
+      }
     </div>
   </div>
 );

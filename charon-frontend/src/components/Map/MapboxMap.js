@@ -2,12 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LoadingScreen from '../Loading/LoadingScreen.js';
-import './MapboxMap.css';
-import Navbar from '../SideBar/Navbar';
+import '../../style/MapboxMap.css';
+import Navbar from '../SideBar/Navbar.js';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function MapboxMap() {
+    const [navVisible, showNavbar] = useState(true); // Sidebar open/closed state
     const mapContainer = useRef(null); // Container for the map
     const map = useRef(null); // Reference to the Mapbox map instance
     const geolocateControlRef = useRef(null); // Reference to the GeolocateControl
@@ -49,7 +50,8 @@ function MapboxMap() {
                 }}
             />
             {isMapLoading && <LoadingScreen />}
-            <Navbar />
+            <Navbar visible={navVisible} show={showNavbar} />
+            
         </div>
     );
 }
