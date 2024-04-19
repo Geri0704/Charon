@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 const LoadingScreen = () => (
   <div className="loading-screen">
     <div className="loading-content">
-      <div className="spinner"></div> { 
+      <div className="spinner"></div> {
         <img src={logo} className="spinning-image" alt="My Application Logo" />
 
       }

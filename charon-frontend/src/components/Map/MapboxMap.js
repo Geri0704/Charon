@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import LoadingScreen from '../Loading/LoadingScreen.js';
 import '../../style/MapboxMap.css';
-import Navbar from '../SideBar/Navbar.js';
+import SideBar from '../SideBar/sidebar.jsx';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -50,7 +50,8 @@ function MapboxMap() {
                 }}
             />
             {isMapLoading && <LoadingScreen />}
-            <Navbar visible={navVisible} show={showNavbar} />
+            <SideBar/>
+            
             
         </div>
     );
