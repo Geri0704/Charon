@@ -25,3 +25,10 @@ yarn-error.log*
 # IDE
 .idea/
 charon-frontend/.idea
+
+# Python enviornment
+charon-backend/.venv
+
+# Cache
+charon-backend/**/*.pyc
+charon-backend/**/__pycache__/
