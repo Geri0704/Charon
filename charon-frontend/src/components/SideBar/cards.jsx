@@ -65,9 +65,6 @@ export default function RideSelection() {
                 selected={selectedRide === 'UberX Share'}
                 onSelect={handleSelectRide}
             />
-            <Typography variant="h6" gutterBottom>
-                Economy
-            </Typography>
             <RideOption
                 serviceName="UberXL"
                 description="Affordable rides for groups up to 6"

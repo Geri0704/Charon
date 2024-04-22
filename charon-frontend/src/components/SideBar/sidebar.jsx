@@ -12,6 +12,7 @@ import BasicTextFields from "./basictextfields";
 import Slider from '@mui/material/Slider';
 import RideSelection from "./cards";
 import CharonLogo from '../../assets/logo.png'
+import {Button} from "@mui/material";
 
 const drawerWidth = 310;
 
@@ -103,6 +104,11 @@ export default function PersistentDrawerLeft() {
 
                 <Divider />
                 <RideSelection/>
+
+                    <Button variant="contained">
+                        Search
+                    </Button>
+
             </Drawer>
         </Box>
     );
