@@ -8,7 +8,6 @@ import SideBar from '../SideBar/sidebar.jsx';
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 function MapboxMap() {
-    const [navVisible, showNavbar] = useState(true); // Sidebar open/closed state
     const mapContainer = useRef(null); // Container for the map
     const map = useRef(null); // Reference to the Mapbox map instance
     const geolocateControlRef = useRef(null); // Reference to the GeolocateControl

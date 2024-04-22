@@ -11,28 +11,9 @@ import Divider from '@mui/material/Divider';
 import BasicTextFields from "./basictextfields";
 import Slider from '@mui/material/Slider';
 import RideSelection from "./cards";
-import CharonLogo from '../assets/logo.png'
+import CharonLogo from '../../assets/logo.png'
 
 const drawerWidth = 310;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    }),
-);
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -88,7 +69,7 @@ export default function PersistentDrawerLeft() {
             >
                 <DrawerHeader>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
-                        <img src={CharonLogo} alt="Charon" style={{ height: 'auto', maxWidth: '80%',  }} />
+                        <img src={CharonLogo} alt="Charon" style={{ width: '50%', height: 'auto' }} />
                     </Typography>
 
                     <IconButton onClick={handleDrawerClose}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../style/LoadingScreen.css'; // Assuming you have a separate CSS file
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 const LoadingScreen = () => (
   <div className="loading-screen">
     <div className="loading-content">
