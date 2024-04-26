@@ -12,6 +12,8 @@ function MapboxMap() {
     const map = useRef(null); // Reference to the Mapbox map instance
     const geolocateControlRef = useRef(null); // Reference to the GeolocateControl
     const [isMapLoading, setMapLoading] = useState(true); // State to track map loading
+    const [initialCoordinates, setInitialCoordinates] = useState({ longitude: -79.3871, latitude: 43.6426 });
+    const [isLocationSet, setIsLocationSet] = useState(false);
 
     useEffect(() => {
         if (map.current || !mapContainer.current) return; // Initialize map only once and if container is available
@@ -19,7 +21,7 @@ function MapboxMap() {
         map.current = new mapboxgl.Map({
             container: mapContainer.current, // Use the container reference
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [-79.3871, 43.6426], // Default center
+            center: [initialCoordinates.longitude,  initialCoordinates.latitude], // Default center
             zoom: 13 // Default zoom
         });
 
@@ -32,6 +34,14 @@ function MapboxMap() {
         });
 
         map.current.addControl(geolocateControlRef.current);
+
+        const onFirstGeolocate = (e) => {
+            setInitialCoordinates({ latitude: e.coords.latitude, longitude: e.coords.longitude });
+            geolocateControlRef.current.off('geolocate', onFirstGeolocate);
+            setIsLocationSet(true);
+        };
+
+        geolocateControlRef.current.on('geolocate', onFirstGeolocate);
 
         map.current.on('load', () => {
             setMapLoading(false); // Set loading state to false when map is loaded
@@ -49,9 +59,7 @@ function MapboxMap() {
                 }}
             />
             {isMapLoading && <LoadingScreen />}
-            <SideBar/>
-            
-            
+            {!isMapLoading && isLocationSet && <SideBar initialCoordinates={initialCoordinates}/>}
         </div>
     );
 }

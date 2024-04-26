@@ -26,7 +26,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function valuetext(value) {
     return `${value} km`;
 }
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft({initialCoordinates}) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
 
@@ -79,7 +79,7 @@ export default function PersistentDrawerLeft() {
                 </DrawerHeader>
 
                 <Divider/>
-                <BasicTextFields/>
+                <BasicTextFields initialCoordinates={initialCoordinates}/>
 
                 <Divider />
                 <Box sx={{ p:2, mt: 2 ,
