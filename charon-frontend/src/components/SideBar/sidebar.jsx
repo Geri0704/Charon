@@ -13,6 +13,7 @@ import Slider from '@mui/material/Slider';
 import RideSelection from "./cards";
 import CharonLogo from '../../assets/logo.png'
 import {Button} from "@mui/material";
+import {useState} from "react";
 
 const drawerWidth = 310;
 
@@ -23,12 +24,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
 }));
-function valuetext(value) {
-    return `${value} km`;
-}
-export default function PersistentDrawerLeft({initialCoordinates}) {
+export default function PersistentDrawerLeft({initialCoordinates, setSliderValue}) {
+    const [startingPointFlag, setStartingPointFlag] = useState(false);
+    const [destinationFlag, setDestinationFlag] = useState(false);
+    const [selectedRide, setSelectedRide] = useState(null);
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
+
+    const isButtonEnabled = startingPointFlag && destinationFlag && selectedRide != null;
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -37,6 +40,10 @@ export default function PersistentDrawerLeft({initialCoordinates}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const handleSliderChange = (event, newValue) => {
+        setSliderValue(newValue);
+    };
+
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -79,7 +86,13 @@ export default function PersistentDrawerLeft({initialCoordinates}) {
                 </DrawerHeader>
 
                 <Divider/>
-                <BasicTextFields initialCoordinates={initialCoordinates}/>
+                <BasicTextFields
+                    initialCoordinates={initialCoordinates}
+                    startingPointFlag={startingPointFlag}
+                    setStartingPointFlag={setStartingPointFlag}
+                    destinationFlag={destinationFlag}
+                    setDestinationFlag={setDestinationFlag}
+                />
 
                 <Divider />
                 <Box sx={{ p:2, mt: 2 ,
@@ -93,7 +106,7 @@ export default function PersistentDrawerLeft({initialCoordinates}) {
                     <Slider
                         aria-label="Distance"
                         defaultValue={0.5}
-                        getAriaValueText={valuetext}
+                        onChange={handleSliderChange}
                         valueLabelDisplay="auto"
                         step={0.250}
                         marks
@@ -103,11 +116,19 @@ export default function PersistentDrawerLeft({initialCoordinates}) {
                 </Box>
 
                 <Divider />
-                <RideSelection/>
+                <RideSelection
+                    selectedRide={selectedRide}
+                    setSelectedRide={setSelectedRide}
+                />
 
-                    <Button variant="contained">
-                        Search
-                    </Button>
+                <Button
+                    className={!isButtonEnabled ? 'disabledCursor' : ''}
+                    disabled={!isButtonEnabled}
+                    variant="contained"
+                >
+                    Search
+                </Button>
+
 
             </Drawer>
         </Box>

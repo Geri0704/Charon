@@ -15,6 +15,9 @@ function MapboxMap() {
     const [initialCoordinates, setInitialCoordinates] = useState({ longitude: -79.3871, latitude: 43.6426 });
     const [isLocationSet, setIsLocationSet] = useState(false);
 
+    const [sliderValue, setSliderValue] = useState(0.5);
+
+
     useEffect(() => {
         if (map.current || !mapContainer.current) return; // Initialize map only once and if container is available
 
@@ -49,7 +52,6 @@ function MapboxMap() {
         });
 
     }, []);
-
     return (
         <div>
             {/* Always render the container, but conditionally render its content */}
@@ -59,7 +61,10 @@ function MapboxMap() {
                 }}
             />
             {isMapLoading && <LoadingScreen />}
-            {!isMapLoading && isLocationSet && <SideBar initialCoordinates={initialCoordinates}/>}
+            {!isMapLoading && isLocationSet && <SideBar
+                initialCoordinates={initialCoordinates}
+                setSliderValue={setSliderValue}
+            />}
         </div>
     );
 }

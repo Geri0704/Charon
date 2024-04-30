@@ -33,9 +33,7 @@ function RideOption({ serviceName, description,isShared, isComfort, selected, on
     );
 }
 
-export default function RideSelection() {
-    const [selectedRide, setSelectedRide] = useState(null);
-
+export default function RideSelection({selectedRide, setSelectedRide}) {
     const handleSelectRide = (serviceName) => {
         // If the same card is clicked, deselect it, otherwise select the new one
         setSelectedRide(selectedRide === serviceName ? null : serviceName);
@@ -46,14 +44,9 @@ export default function RideSelection() {
             <Typography variant="h4" gutterBottom>
                 Choose a ride
             </Typography>
-            <Typography variant="h6" gutterBottom>
-                Recommended
-            </Typography>
             <RideOption
                 serviceName="UberX"
-                timeAway="2"
                 description="Affordable, everyday rides"
-                price="CA$16.35"
                 isComfort={true}
                 selected={selectedRide === 'UberX'}
                 onSelect={handleSelectRide}

@@ -4,11 +4,9 @@ import React, {useEffect, useState} from "react";
 import '../../style/sidebar.css'
 import { reverseLookup } from '../../services/mapService.js';
 
-export default function BasicTextFields({initialCoordinates}) {
+export default function BasicTextFields({initialCoordinates, startingPointFlag, setStartingPointFlag, setDestinationFlag}) {
     const [startingAddress, setStartingAddress] = useState('');
-    const [startingPointFlag, setStartingPointFlag] = useState(false);
     const [destination, setDestination] = useState('');
-    const [destinationFlag, setDestinationFlag] = useState(false);
     const [startingCoordinates, setStartingCoordinates] = useState({longitude: null, latitude: null});
 
     const mapboxAccessToken = process.env.REACT_APP_MAPBOX_API_KEY;
