@@ -51,11 +51,12 @@ function MapboxMap() {
             geolocateControlRef.current.trigger();
         });
 
-    }, []);
+    });
+
     return (
         <div>
             {/* Always render the container, but conditionally render its content */}
-            <div className="map-container" ref={mapContainer} style={{ 
+            <div className="map-container" ref={mapContainer} style={{
                 width: '100vw',
                 height: '100vh',
                 }}
@@ -63,6 +64,7 @@ function MapboxMap() {
             {isMapLoading && <LoadingScreen />}
             {!isMapLoading && isLocationSet && <SideBar
                 initialCoordinates={initialCoordinates}
+                sliderValue={sliderValue}
                 setSliderValue={setSliderValue}
             />}
         </div>

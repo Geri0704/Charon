@@ -24,7 +24,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
 }));
-export default function PersistentDrawerLeft({initialCoordinates, setSliderValue}) {
+export default function PersistentDrawerLeft({initialCoordinates, sliderValue, setSliderValue}) {
     const [startingPointFlag, setStartingPointFlag] = useState(false);
     const [destinationFlag, setDestinationFlag] = useState(false);
     const [selectedRide, setSelectedRide] = useState(null);
@@ -43,7 +43,6 @@ export default function PersistentDrawerLeft({initialCoordinates, setSliderValue
     const handleSliderChange = (event, newValue) => {
         setSliderValue(newValue);
     };
-
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -102,7 +101,10 @@ export default function PersistentDrawerLeft({initialCoordinates, setSliderValue
                     alignItems: 'center', // Center-align items horizontally
                     justifyContent: 'center', // Center-align items vertically
                 }}>
-                    <Typography gutterBottom>Walking Distance (Km)</Typography>
+                    <Typography gutterBottom>
+                        Walking Distance: <span style={{ fontWeight: 'bold' }}>{sliderValue.toFixed(2)} </span> (Km)
+                    </Typography>
+
                     <Slider
                         aria-label="Distance"
                         defaultValue={0.5}
@@ -122,6 +124,7 @@ export default function PersistentDrawerLeft({initialCoordinates, setSliderValue
                 />
 
                 <Button
+                    id="searchButton"
                     className={!isButtonEnabled ? 'disabledCursor' : ''}
                     disabled={!isButtonEnabled}
                     variant="contained"
